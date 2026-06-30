@@ -1,0 +1,25 @@
+# Dependency directories
+node_modules/
+vendor/
+backend/vendor/
+backend/node_modules/
+frontend/node_modules/
+
+# Local env files
+.env
+.env.backup
+.env.production
+backend/.env
+backend-old/.env
+
+# IDE / System files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+.agents/
+
+# Downloads and non-project files
+Downloads/
+.dist/
+skills-lock.json
