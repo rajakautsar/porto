@@ -66,7 +66,7 @@ GET /api/skills
 **Example:**
 ```http
 GET /api/skills?category=Frontend
-```
+```ssss
 
 **Response (200 OK):**
 ```json
