@@ -65,13 +65,13 @@ export default function Contact() {
               </p>
 
               <div className="contact-methods">
-                <a href="mailto:rajakautsar@gmail.com" className="contact-method-item">
+                <a href="mailto:[EMAIL_ADDRESS]" className="contact-method-item">
                   <div className="contact-icon-box">
                     <Mail size={20} />
                   </div>
                   <div>
                     <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>EMAIL</div>
-                    <div style={{ fontWeight: 600 }}>rajakautsar@gmail.com</div>
+                    <div style={{ fontWeight: 600 }}>rajakautsar09@gmail.com</div>
                   </div>
                 </a>
 
