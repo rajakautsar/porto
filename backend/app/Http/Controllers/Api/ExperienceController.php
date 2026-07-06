@@ -20,10 +20,10 @@ class ExperienceController extends Controller
                     'Sistem registrasi & manajemen peserta QR Code untuk BPA Fair 2026 (5.000 peserta), Imlek Nasional 2026 (700 peserta), dan Pembekalan PDI Perjuangan (120 peserta).',
                     'Mengembangkan BPA Fair System (Registrasi, E-Catalog, Auction System, Visitor Monitoring, Bulk Import/Export PDF).',
                     'Mengembangkan website Screenverse dari perencanaan UI/UX hingga backend.',
-                    'Sistem E-Invitation VIP & VVIP berbasis QR Code & integrasi printer ID Card Fargo DTC1000.',
+                    'Sistem E-Invitation VIP & VVIP berbasis QR Code & integrasi printer ID Card Fargo.',
                     'Tim IT Support di lapangan untuk event nasional: BPA Fair 2026, DXI 2026, Imlek Nasional 2026, Pertamina Employee Gathering.'
                 ],
-                'technologies' => ['Laravel', 'PHP', 'MySQL', 'JavaScript', 'YOLOv8', 'Computer Vision', 'Hostinger', 'Fargo DTC1000']
+                'technologies' => ['Laravel', 'PHP', 'MySQL', 'JavaScript', 'YOLOv8', 'Computer Vision', 'Hostinger', 'Fargo  1000']
             ],
             [
                 'role' => 'Mobile App Developer Intern',

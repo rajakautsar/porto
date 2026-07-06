@@ -24,7 +24,7 @@ export default function Projects() {
       id: 2,
       title: 'Imlek Nasional 2026 VIP E-Invitation System',
       category: 'QR Check-in & Hardware Integration',
-      desc: 'Sistem e-invitation VIP & VVIP berbasis scanning QR Code, dashboard validasi check-in real-time, dan integrasi otomatis pencetakan ID Card Fargo DTC1000.',
+      desc: 'Sistem e-invitation VIP & VVIP berbasis scanning QR Code, dashboard validasi check-in real-time, dan integrasi otomatis pencetakan ID Card Fargo  1000.',
       technologies: ['Laravel', 'QR Scanner', 'Hardware Integration', 'MySQL'],
       image: '/projects/imleknas.png',
       gradient: 'linear-gradient(135deg, #d97706 0%, #b45309 100%)',
@@ -103,33 +103,41 @@ export default function Projects() {
         </div>
 
         <div className="projects-grid">
-          {displayProjects.map((project, idx) => (
-            <motion.article
-              key={project.id || idx}
-              className="project-card"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: (idx % 2) * 0.1 }}
-            >
-              <div className="project-preview-area">
-                {project.image ? (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="project-img-preview"
-                  />
-                ) : (
-                  <div
-                    className="project-gradient-bg"
-                    style={{ background: project.gradient }}
-                  >
-                    <div className="project-preview-overlay"></div>
-                    <Layers size={48} color="#ffffff" style={{ opacity: 0.35, zIndex: 1 }} />
-                  </div>
-                )}
-                <span className="project-category-badge">{project.category}</span>
-              </div>
+          {displayProjects.map((project, idx) => {
+            const fromLeft = idx % 2 === 0;
+            return (
+              <motion.article
+                key={project.id || idx}
+                className="project-card"
+                initial={{ opacity: 0, x: fromLeft ? -24 : 24 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <motion.div
+                  className="project-preview-area"
+                  initial={{ clipPath: 'inset(0 0 100% 0)' }}
+                  whileInView={{ clipPath: 'inset(0 0 0% 0)' }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ duration: 0.7, ease: [0.65, 0, 0.35, 1] }}
+                >
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="project-img-preview"
+                    />
+                  ) : (
+                    <div
+                      className="project-gradient-bg"
+                      style={{ background: project.gradient }}
+                    >
+                      <div className="project-preview-overlay"></div>
+                      <Layers size={48} color="#ffffff" style={{ opacity: 0.35, zIndex: 1 }} />
+                    </div>
+                  )}
+                  <span className="project-category-badge">{project.category}</span>
+                </motion.div>
 
               <div className="project-body">
                 <div className="project-header">
@@ -172,7 +180,8 @@ export default function Projects() {
                 </div>
               </div>
             </motion.article>
-          ))}
+          );
+        })}
         </div>
       </div>
     </section>

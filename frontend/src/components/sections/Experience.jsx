@@ -1,12 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { getExperience } from '../../services/api';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { Award } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { staggerContainer } from '../../utils/motionVariants';
 
 export default function Experience() {
   const [items, setItems] = useState([]);
   const [sectionRef, isVisible] = useScrollAnimation(0.15);
+  const timelineRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ['start 0.8', 'end 0.5'],
+  });
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   const fallbackExperience = [
     {
@@ -21,10 +29,10 @@ export default function Experience() {
         'Sistem registrasi & manajemen peserta QR Code untuk BPA Fair 2026 (5.000 peserta), Imlek Nasional 2026 (700 peserta), dan Pembekalan PDI Perjuangan (120 peserta).',
         'Mengembangkan BPA Fair System dari nol (Registrasi, E-Catalog, Auction System, Visitor Monitoring, Bulk Import/Export PDF).',
         'Mengembangkan website Screenverse dari perencanaan UI/UX hingga backend.',
-        'Sistem E-Invitation VIP & VVIP berbasis QR Code & integrasi pencetakan ID Card Fargo DTC1000.',
+        'Sistem E-Invitation VIP & VVIP berbasis QR Code & integrasi pencetakan ID Card Fargo  1000.',
         'Tim IT Support & Monitoring di lapangan untuk event nasional: BPA Fair 2026, DXI 2026, Imlek Nasional 2026, Pertamina Employee Gathering.'
       ],
-      technologies: ['Laravel', 'PHP', 'MySQL', 'JavaScript', 'YOLOv8', 'Computer Vision', 'Hostinger', 'Fargo DTC1000']
+      technologies: ['Laravel', 'PHP', 'MySQL', 'JavaScript', 'YOLOv8', 'Computer Vision', 'Hostinger', 'Fargo  1000']
     },
     {
       role: 'Mobile App Developer Intern',
@@ -101,17 +109,29 @@ export default function Experience() {
           </h2>
         </div>
 
-        <div className="timeline-wrapper">
+        <div className="timeline-wrapper" ref={timelineRef}>
           <div className="timeline-line"></div>
+          <motion.div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: '20px',
+              width: '2px',
+              backgroundColor: 'var(--accent-primary)',
+              height: lineHeight,
+              transformOrigin: 'top',
+              zIndex: 1
+            }}
+          />
 
           {displayItems.map((item, idx) => (
             <motion.div
               key={idx}
               className="timeline-item"
-              initial={{ opacity: 0, x: -24 }}
+              initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: idx * 0.15 }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
             >
               <div className={`timeline-dot ${item.isCurrent ? 'current' : ''}`}></div>
 
@@ -157,15 +177,22 @@ export default function Experience() {
             </h3>
           </div>
 
-          <div className="certifications-grid">
+          <motion.div
+            className="certifications-grid"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={staggerContainer(0.08)}
+          >
             {certifications.map((cert, cIdx) => (
               <motion.div
                 key={cIdx}
                 className="cert-card"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: (cIdx % 3) * 0.1 }}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.92 },
+                  show: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
+                }}
+                whileHover={{ y: -4 }}
               >
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>
@@ -181,7 +208,7 @@ export default function Experience() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

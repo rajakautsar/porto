@@ -21,7 +21,7 @@ JL. Johar Nomor 9, KOTA ADM. JAKARTA PUSAT, DKI JAKARTA · On-site
 * Melakukan deployment dan konfigurasi hosting/server menggunakan Hostinger.
 * Mengembangkan backend API, optimasi database query, dan maintenance system untuk meningkatkan performa aplikasi.
 * Membangun sistem counting person berbasis YOLOv8 dan computer vision untuk monitoring visitor real-time.
-* Mengintegrasikan sistem pencetakan ID Card menggunakan Fargo DTC1000 untuk kebutuhan event.
+* Mengintegrasikan sistem pencetakan ID Card menggunakan Fargo  1000 untuk kebutuhan event.
 * Menjadi pembuat sistem registrasi peserta untuk acara Pembekalan & Konsolidasi Partai PDI Perjuangan.
 * Menjadi IT Support pada Pertamina Employee Gathering dengan fokus pada operasional teknis dan monitoring sistem.
 * Menjadi pembuat sistem registrasi, handling scanning QR Code, dan monitoring peserta pada Imlek Nasional 2026 dan BPA Fair 2026.

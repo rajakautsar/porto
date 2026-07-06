@@ -3,6 +3,7 @@ import { getSkills } from '../../services/api';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { Code2, Zap, FileCode2, Palette, Server, Cpu, Network, Database, GitBranch, Package, CheckCircle2, Container, Cpu as DefaultIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { fadeUp, staggerContainer } from '../../utils/motionVariants';
 
 const iconMap = {
   Code2, Zap, FileCode2, Palette, Server, Cpu, Network, Database, GitBranch, Package, CheckCircle2, Container
@@ -10,7 +11,7 @@ const iconMap = {
 
 export default function Skills() {
   const [skills, setSkills] = useState([]);
-  const [sectionRef, isVisible] = useScrollAnimation(0.15);
+  const [sectionRef] = useScrollAnimation(0.15);
 
   const fallbackSkills = [
     {
@@ -76,22 +77,25 @@ export default function Skills() {
   return (
     <section id="skills" className="section-padding" ref={sectionRef}>
       <div className="container">
-        <div className={`section-header reveal ${isVisible ? 'visible' : ''}`}>
+        <div className="section-header">
           <div className="section-tag">COMPETENCIES</div>
           <h2 className="section-title">
             Skills & <span>Tech Stack</span>
           </h2>
         </div>
 
-        <div className="skills-grid">
-          {displaySkills.map((group, groupIdx) => (
+        <motion.div
+          className="skills-grid"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-80px' }}
+          variants={staggerContainer(0.15)}
+        >
+          {displaySkills.map((group) => (
             <motion.article
               key={group.category}
               className="skill-cluster-card"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: groupIdx * 0.1 }}
+              variants={fadeUp}
             >
               <div className="skill-cluster-header">
                 <h3 className="skill-cluster-title">{group.category}</h3>
@@ -100,7 +104,7 @@ export default function Skills() {
 
               <div className="skill-items-list">
                 {group.items &&
-                  group.items.map((item) => {
+                  group.items.map((item, itemIdx) => {
                     const IconComponent = iconMap[item.icon] || DefaultIcon;
                     const levelVal = typeof item === 'string' ? 85 : item.level || 85;
                     const nameStr = typeof item === 'string' ? item : item.name;
@@ -116,10 +120,13 @@ export default function Skills() {
                         </div>
 
                         <div className="progress-bar-bg">
-                          <div
+                          <motion.div
                             className="progress-bar-fill"
-                            style={{ width: isVisible ? `${levelVal}%` : '0%' }}
-                          ></div>
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${levelVal}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.9, delay: 0.2 + itemIdx * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                          />
                         </div>
                       </div>
                     );
@@ -127,7 +134,7 @@ export default function Skills() {
               </div>
             </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

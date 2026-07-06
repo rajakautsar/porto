@@ -3,6 +3,7 @@ import { sendContact } from '../../services/api';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { Mail, MapPin, Send, Github, Linkedin, Instagram, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { fadeUp, staggerContainer } from '../../utils/motionVariants';
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -51,10 +52,10 @@ export default function Contact() {
           {/* Left Column: Contact Info & Socials */}
           <motion.div
             className="contact-info-card"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.6 }}
           >
             <div>
               <h3 className="contact-info-title">Mari Terhubung</h3>
@@ -125,70 +126,77 @@ export default function Contact() {
           {/* Right Column: Interactive Form */}
           <motion.div
             className="contact-form-card"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
             <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label className="form-label" htmlFor="contact-name">
-                  Nama Lengkap
-                </label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  className="form-input"
-                  placeholder="Masukkan nama Anda"
-                  value={form.name}
-                  onChange={handleChange('name')}
-                  required
-                />
-              </div>
+              <motion.div
+                variants={staggerContainer(0.08, 0.2)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+              >
+                <motion.div variants={fadeUp} className="form-group">
+                  <label className="form-label" htmlFor="contact-name">
+                    Nama Lengkap
+                  </label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    className="form-input"
+                    placeholder="Masukkan nama Anda"
+                    value={form.name}
+                    onChange={handleChange('name')}
+                    required
+                  />
+                </motion.div>
 
-              <div className="form-group">
-                <label className="form-label" htmlFor="contact-email">
-                  Alamat Email
-                </label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  className="form-input"
-                  placeholder="nama@domain.com"
-                  value={form.email}
-                  onChange={handleChange('email')}
-                  required
-                />
-              </div>
+                <motion.div variants={fadeUp} className="form-group">
+                  <label className="form-label" htmlFor="contact-email">
+                    Alamat Email
+                  </label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    className="form-input"
+                    placeholder="nama@domain.com"
+                    value={form.email}
+                    onChange={handleChange('email')}
+                    required
+                  />
+                </motion.div>
 
-              <div className="form-group">
-                <label className="form-label" htmlFor="contact-message">
-                  Pesan Anda
-                </label>
-                <textarea
-                  id="contact-message"
-                  className="form-textarea"
-                  rows="5"
-                  placeholder="Tuliskan pesan atau detail proyek Anda di sini..."
-                  value={form.message}
-                  onChange={handleChange('message')}
-                  required
-                ></textarea>
-              </div>
+                <motion.div variants={fadeUp} className="form-group">
+                  <label className="form-label" htmlFor="contact-message">
+                    Pesan Anda
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    className="form-textarea"
+                    rows="5"
+                    placeholder="Tuliskan pesan atau detail proyek Anda di sini..."
+                    value={form.message}
+                    onChange={handleChange('message')}
+                    required
+                  ></textarea>
+                </motion.div>
 
-              <button type="submit" className="btn-submit" disabled={loading}>
-                {loading ? (
-                  <>
-                    <Loader2 size={18} className="animate-spin" />
-                    <span>Mengirim...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Kirim Pesan</span>
-                    <Send size={16} />
-                  </>
-                )}
-              </button>
+                <motion.button variants={fadeUp} type="submit" className="btn-submit" disabled={loading}>
+                  {loading ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" />
+                      <span>Mengirim...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Kirim Pesan</span>
+                      <Send size={16} />
+                    </>
+                  )}
+                </motion.button>
+              </motion.div>
             </form>
 
             {status && (

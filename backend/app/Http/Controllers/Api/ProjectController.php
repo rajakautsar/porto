@@ -23,7 +23,7 @@ class ProjectController extends Controller
                 'id' => 2,
                 'title' => 'Imlek Nasional 2026 VIP E-Invitation System',
                 'category' => 'QR Check-in & Hardware Integration',
-                'desc' => 'Sistem e-invitation VIP & VVIP berbasis scanning QR Code, dashboard validasi check-in real-time, dan integrasi otomatis pencetakan ID Card Fargo DTC1000.',
+                'desc' => 'Sistem e-invitation VIP & VVIP berbasis scanning QR Code, dashboard validasi check-in real-time, dan integrasi otomatis pencetakan ID Card Fargo',
                 'technologies' => ['Laravel', 'QR Scanner', 'Hardware Integration', 'MySQL'],
                 'image' => '/projects/imleknas.png',
                 'demoUrl' => 'https://imleknas.destiket.com/',
