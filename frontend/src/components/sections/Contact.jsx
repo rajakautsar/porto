@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { sendContact } from '../../services/api';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { Mail, MapPin, Send, Github, Linkedin, Instagram, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -48,7 +49,13 @@ export default function Contact() {
 
         <div className="contact-grid">
           {/* Left Column: Contact Info & Socials */}
-          <div className={`contact-info-card reveal delay-100 ${isVisible ? 'visible' : ''}`}>
+          <motion.div
+            className="contact-info-card"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+          >
             <div>
               <h3 className="contact-info-title">Mari Terhubung</h3>
               <p className="contact-info-text">
@@ -113,10 +120,16 @@ export default function Contact() {
                 </a>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Interactive Form */}
-          <div className={`contact-form-card reveal delay-200 ${isVisible ? 'visible' : ''}`}>
+          <motion.div
+            className="contact-form-card"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          >
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label className="form-label" htmlFor="contact-name">
@@ -184,7 +197,7 @@ export default function Contact() {
                 <span>{status.text}</span>
               </div>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getExperience } from '../../services/api';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
-import { Award, Calendar, CheckSquare } from 'lucide-react';
+import { Award } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Experience() {
   const [items, setItems] = useState([]);
@@ -104,9 +105,13 @@ export default function Experience() {
           <div className="timeline-line"></div>
 
           {displayItems.map((item, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className={`timeline-item reveal delay-${(idx + 1) * 150} ${isVisible ? 'visible' : ''}`}
+              className="timeline-item"
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: idx * 0.15 }}
             >
               <div className={`timeline-dot ${item.isCurrent ? 'current' : ''}`}></div>
 
@@ -139,14 +144,14 @@ export default function Experience() {
                     ))}
                 </div>
               </article>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Certifications Subsection */}
         <div style={{ marginTop: '5rem' }}>
           <div className={`section-header reveal ${isVisible ? 'visible' : ''}`} style={{ marginBottom: '2rem' }}>
-            <div className="section-tag" style={{ background: 'rgba(56, 189, 248, 0.2)' }}>VALIDATED SKILLS</div>
+            <div className="section-tag" style={{ background: 'var(--accent-subtle)', border: '1px solid var(--accent-primary)', color: 'var(--accent-primary)' }}>VALIDATED SKILLS</div>
             <h3 className="section-title" style={{ fontSize: 'var(--text-2xl)' }}>
               Licenses & <span>Certifications</span>
             </h3>
@@ -154,9 +159,13 @@ export default function Experience() {
 
           <div className="certifications-grid">
             {certifications.map((cert, cIdx) => (
-              <div
+              <motion.div
                 key={cIdx}
-                className={`cert-card reveal delay-${(cIdx + 1) * 100} ${isVisible ? 'visible' : ''}`}
+                className="cert-card"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: (cIdx % 3) * 0.1 }}
               >
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>
@@ -170,7 +179,7 @@ export default function Experience() {
                   <span>{cert.date}</span>
                   <span style={{ opacity: 0.8 }}>{cert.credential}</span>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

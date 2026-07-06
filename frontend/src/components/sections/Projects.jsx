@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getProjects } from '../../services/api';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { ExternalLink, Github, Layers } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
@@ -80,6 +81,7 @@ export default function Projects() {
             demoUrl: proj.demoUrl || '',
             githubUrl: proj.githubUrl || '#'
           }));
+
           setProjects(formatted);
         } else {
           setProjects(fallbackProjects);
@@ -102,11 +104,13 @@ export default function Projects() {
 
         <div className="projects-grid">
           {displayProjects.map((project, idx) => (
-            <article
+            <motion.article
               key={project.id || idx}
-              className={`project-card reveal delay-${(idx + 1) * 100} ${
-                isVisible ? 'visible' : ''
-              }`}
+              className="project-card"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: (idx % 2) * 0.1 }}
             >
               <div className="project-preview-area">
                 {project.image ? (
@@ -149,7 +153,7 @@ export default function Projects() {
                         rel="noopener noreferrer"
                         className="icon-link"
                         title="Visit Live Project Website"
-                        style={{ background: 'var(--accent-primary)', color: '#0b121e', borderColor: 'var(--accent-primary)' }}
+                        style={{ background: 'var(--accent-primary)', color: 'var(--bg-deep)', borderColor: 'var(--accent-primary)' }}
                       >
                         <ExternalLink size={18} />
                       </a>
@@ -167,7 +171,7 @@ export default function Projects() {
                   ))}
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>

@@ -6,8 +6,10 @@ import Experience from './components/sections/Experience';
 import Projects from './components/sections/Projects';
 import Contact from './components/sections/Contact';
 import Footer from './components/Footer';
+import { useLenis } from './hooks/useLenis';
 
 function App() {
+  useLenis();
   const glowRef = useRef(null);
 
   useEffect(() => {

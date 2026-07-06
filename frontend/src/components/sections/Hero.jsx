@@ -3,6 +3,7 @@ import { getPortfolio } from '../../services/api';
 import { useTypewriter } from '../../hooks/useTypewriter';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { ArrowRight, GraduationCap, Award } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
   const [profile, setProfile] = useState(null);
@@ -31,12 +32,20 @@ export default function Hero() {
           <div className={`reveal ${isVisible ? 'visible' : ''}`}>
             <div className="hero-greeting">
               <span className="hero-greeting-line"></span>
-              <span>PORTFOLIO RESMI</span>
+              <span>PORTFOLIO / 2026</span>
             </div>
 
             <h1 className="hero-name">
               <span>MUHAMMAD</span>
-              <span className="hero-name-gradient">RAJA KAUTSAR</span>
+              <span className="hero-name-gradient">
+                RAJA KAUTSAR
+                <motion.span
+                  className="name-underline"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
+                />
+              </span>
             </h1>
 
             <div className="typewriter-box">

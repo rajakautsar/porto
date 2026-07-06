@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getSkills } from '../../services/api';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { Code2, Zap, FileCode2, Palette, Server, Cpu, Network, Database, GitBranch, Package, CheckCircle2, Container, Cpu as DefaultIcon } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const iconMap = {
   Code2, Zap, FileCode2, Palette, Server, Cpu, Network, Database, GitBranch, Package, CheckCircle2, Container
@@ -48,7 +49,6 @@ export default function Skills() {
     getSkills()
       .then((res) => {
         if (Array.isArray(res.data) && res.data.length > 0) {
-          // Format old simple items array if backend hasn't updated or returns string array
           const formatted = res.data.map((cat, idx) => {
             if (Array.isArray(cat.items) && typeof cat.items[0] === 'string') {
               return {
@@ -85,11 +85,13 @@ export default function Skills() {
 
         <div className="skills-grid">
           {displaySkills.map((group, groupIdx) => (
-            <article
+            <motion.article
               key={group.category}
-              className={`skill-cluster-card reveal delay-${(groupIdx + 1) * 100} ${
-                isVisible ? 'visible' : ''
-              }`}
+              className="skill-cluster-card"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: groupIdx * 0.1 }}
             >
               <div className="skill-cluster-header">
                 <h3 className="skill-cluster-title">{group.category}</h3>
@@ -107,7 +109,7 @@ export default function Skills() {
                       <div key={nameStr} className="skill-item">
                         <div className="skill-item-info">
                           <span className="skill-item-name">
-                            <IconComponent size={16} className="text-accent" style={{ color: 'var(--accent-glow)' }} />
+                            <IconComponent size={16} style={{ color: 'var(--accent-primary)' }} />
                             <span>{nameStr}</span>
                           </span>
                           <span className="skill-item-level">{levelVal}%</span>
@@ -123,7 +125,7 @@ export default function Skills() {
                     );
                   })}
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>
